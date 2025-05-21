@@ -1,0 +1,1 @@
+const double TEXT_SIZE = 15.0;

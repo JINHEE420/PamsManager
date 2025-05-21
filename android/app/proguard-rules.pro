@@ -1,0 +1,19 @@
+## Flutter wrapper
+-keep class com.yourapp.** { *; }
+-keepclassmembers class * { @android.webkit.JavascriptInterface <methods>; }
+-keep class android.hardware.** { *; }
+-keep class androidx.camera.** { *; }
+-keep class com.google.mlkit.** { *; }
+-keep class your.package.name.models.** { *; }
+-keep class io.flutter.app.** { *; }
+-keep class io.flutter.plugin.**  { *; }
+-keep class io.flutter.util.**  { *; }
+-keep class io.flutter.view.**  { *; }
+-keep class io.flutter.**  { *; }
+-keep class io.flutter.embedding.** { *; }
+-keep class io.flutter.plugins.**  { *; }
+-keep class io.flutter.plugins.camera.** { *; }
+-keep class com.yourpackage.** { *; }
+-keep class com.yourpackage.camera.** { *; }
+-dontwarn io.flutter.embedding.**
+-dontwarn androidx.camera.**
