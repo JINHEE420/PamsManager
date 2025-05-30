@@ -28,7 +28,6 @@ class _PilesScreenState extends State<PilesScreen> {
   void initState() {
     super.initState();
     controller.getSiteList();
-    setState(() {});
   }
 
   List<dynamic> pileLoclist = <String>[];
