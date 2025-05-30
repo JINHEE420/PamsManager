@@ -97,7 +97,14 @@ class PamsController extends GetxController {
     return msg;
   }
 
-  // 검색 조건 업데애트
+  // 로그인시 오늘 날짜로 업데이트 (DB)
+  Future<void> updateSearchDayToToday() async {
+    final today = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    await dbController.updateSearchDayToToday(today);
+    search.day = today;
+  }
+
+  // 검색 조건 업데이트
   void updateSearchOption() {
     dbController.updateSearchOption(search);
   }
@@ -151,6 +158,8 @@ class PamsController extends GetxController {
 
           idController.clear();
           pwController.clear();
+
+          await updateSearchDayToToday();
 
           //Get.offAll(PilesScreen());
           Get.offAll(DashboardScreen());
@@ -267,7 +276,6 @@ class PamsController extends GetxController {
         'prevPileCode': 0,
         'rowCnt': rowCnt
       };
-
       http.Response response =
           await http.post(url, body: jsonEncode(body), headers: headers);
       if (response.statusCode == 200) {

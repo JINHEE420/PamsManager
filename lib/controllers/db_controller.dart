@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pams_manager/models/login_model.dart';
 import 'package:pams_manager/models/pams_option_model.dart';
 import 'package:pams_manager/models/search_model.dart';
@@ -34,6 +35,13 @@ class DbController extends GetxController {
 
   // 검색 옵션 수정하기
   void updateSearchOption(SearchModel option) async {
+    await OptionDbHelper.db.updateSearchOption(option);
+  }
+
+  // 로그인시 현재날짜로 DB 수정
+  Future<void> updateSearchDayToToday(String today) async {
+    SearchModel option = await getSearchOption();
+    option.day = today;
     await OptionDbHelper.db.updateSearchOption(option);
   }
 }

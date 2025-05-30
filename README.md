@@ -2,15 +2,6 @@
 
 Pams Management
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2025/5/27일
+updateSearchDayToToday() 생성 -> 로그인시 날짜는 현재 날짜로 보여주게 하는 메서드 생성 후 
+loginProc(pams_controller.dart)에 추가

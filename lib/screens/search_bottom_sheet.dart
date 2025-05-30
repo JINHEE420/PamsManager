@@ -117,10 +117,11 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
                     OutlinedButton(
                       style: buttonStyle(),
                       onPressed: () {
+                        controller.equipButtonResult = true;
                         controller.isAllSelected = true; // true = 전체날짜를 조회.
                         controller.getPileListRange(controller.isAllSelected);
                         controller.search.day = '전체';
-                        Navigator.pop(context, "refresh");
+                        Navigator.pop(context, "all");
                       },
                       child: Text("조회"),
                     )
@@ -192,7 +193,7 @@ class _SearchBottomSheetState extends State<SearchBottomSheet> {
                             .getPileListIncludeEquip(controller.equipCode);
                         controller.equipButtonResult = false;
 
-                        Navigator.pop(context, "refresh");
+                        Navigator.pop(context, "equip");
                       },
                       child: Text("조회"),
                     )

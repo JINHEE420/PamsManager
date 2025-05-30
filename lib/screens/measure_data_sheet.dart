@@ -30,11 +30,6 @@ class _MeasureDataSheet extends State<MeasureDataSheet> {
 
   @override
   void dispose() {
-    /* 화면이 닫힐 때 초기화 (checkingLengthController)
-     -> 측정잔량이 있는 시트에 들어갔다 나온후(업로드를 하여도) 측정잔량에 입력 한 값을 계속 들고있어서
-     미점검인 시트의 측정잔량에는 값이 없어야 하는게 정상인데 값이 들어있기 때문에 checkingLengthController를 화면이 닫힐 때 초기화 해주어야 한다.
-     */
-    controller.checkingLengthController = TextEditingController(text: "");
     super.dispose();
   }
 
@@ -42,18 +37,9 @@ class _MeasureDataSheet extends State<MeasureDataSheet> {
   Widget build(BuildContext context) {
     InspectionModel record = widget.record;
 
-    // TextEditingController 값이 비어 있을 경우 기본값 0을 설정
-    if (controller.checkingLengthController.text.isNotEmpty) {
-      try {
-        controller.checkingData =
-            double.parse(controller.checkingLengthController.text);
-      } catch (e) {
-        // 잘못된 입력이 있을 경우 기본값 0을 사용
-        controller.checkingData = 0;
-      }
-    }
-
-    double measureData = record.pileLength - controller.checkingData;
+    final double checkingInput =
+        double.tryParse(controller.checkingLengthController.text) ?? 0.0;
+    double measureData = record.pileLength - checkingInput;
 
     return Column(
       children: [
@@ -360,7 +346,7 @@ class _MeasureDataSheet extends State<MeasureDataSheet> {
                         padding: EdgeInsets.all(5),
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "${measureData}m",
+                          "${measureData.toStringAsFixed(1)}m",
                           style: TextStyle(
                               fontSize: RECORD_PAPER_TEXT_SIZE,
                               color: PRIMARY_TEXT_COLOR),
@@ -439,13 +425,22 @@ class _MeasureDataSheet extends State<MeasureDataSheet> {
                   padding: EdgeInsets.all(20.0),
                 ),
                 onPressed: () {
-                  if (controller.checkingData == 0.0) {
+                  final text = controller.checkingLengthController.text.trim();
+
+                  // 측정값이 비어 있거나 0일 경우 제출 막기
+                  if (text.isEmpty || controller.checkingData == 0.0) {
                     dialog(context);
-                  } else {
-                    count++;
-                    controller.updateInspectionProc(count);
-                    controller.checkingLengthController.clear();
+                    return;
                   }
+
+                  count++;
+                  controller.updateInspectionProc(count);
+
+                  // 제출 후 입력 초기화
+                  controller.checkingLengthController.clear();
+                  controller.checkingData = 0.0;
+
+                  setState(() {}); // UI 갱신 (예: 측정관입깊이 영역)
                 },
                 icon: Icon(
                   Icons.upload,
