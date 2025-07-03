@@ -53,7 +53,12 @@ class RecordDataSheet extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(width: 1, color: SEARCH_BORDER_COLOR),
                     ),
-                    child: Text(record.constDay!, style: record_textStyle()),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Text(record.constDay!,
+                          style: record_textStyle(scalable: true)),
+                    ),
                   ),
                 ),
                 Container(
@@ -264,33 +269,33 @@ class RecordDataSheet extends StatelessWidget {
             ),
           ),
           // 평균리바운드
-          Container(
-            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-            width: double.infinity,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: RECORD_TITLE_WIDTH,
-                  child: Text("평균리바운드", style: record_textStyle()),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    alignment: Alignment.centerLeft,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(width: 1, color: SEARCH_BORDER_COLOR),
-                    ),
-                    child: Text("${record.avgRebound!.toStringAsFixed(1)}mm",
-                        style: record_textStyle()),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Container(
+          //   padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
+          //   width: double.infinity,
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.start,
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     children: [
+          //       Container(
+          //         alignment: Alignment.center,
+          //         width: RECORD_TITLE_WIDTH,
+          //         child: Text("평균리바운드", style: record_textStyle()),
+          //       ),
+          //       Expanded(
+          //         child: Container(
+          //           padding: EdgeInsets.all(5),
+          //           alignment: Alignment.centerLeft,
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(5),
+          //             border: Border.all(width: 1, color: SEARCH_BORDER_COLOR),
+          //           ),
+          //           child: Text("${record.avgRebound!.toStringAsFixed(1)}mm",
+          //               style: record_textStyle()),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           SizedBox(
             height: 20,
           ),
@@ -365,7 +370,7 @@ class RecordDataSheet extends StatelessWidget {
     );
   }
 
-  TextStyle record_textStyle() {
+  TextStyle record_textStyle({bool scalable = false}) {
     return TextStyle(
       fontSize: RECORD_PAPER_TEXT_SIZE,
       color: PRIMARY_TEXT_COLOR,

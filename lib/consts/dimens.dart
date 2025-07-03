@@ -1,4 +1,3 @@
-
 final double LOGIN_INPUT_WIDTH = 250;
 final double LOGIN_BTN_WIDTH = 230;
 final double SUB_TITLE_HEIGHT = 40;
